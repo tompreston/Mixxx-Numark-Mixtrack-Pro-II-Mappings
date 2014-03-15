@@ -41,11 +41,11 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>rate_temp_down</key>
+                <key>NumarkMixTrackProII.pitch_bend_down_or_keylock</key>
                 <status>0x90</status>
                 <midino>0x43</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -374,7 +374,7 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>NumarkMixTrackProII.toggleManualLooping</key>
+                <key>NumarkMixTrackProII.shift</key>
                 <status>0x90</status>
                 <midino>0x62</midino>
                 <options>
@@ -401,7 +401,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>NumarkMixTrackProII.toggleManualLooping</key>
+                <key>NumarkMixTrackProII.shift</key>
                 <status>0x90</status>
                 <midino>0x61</midino>
                 <options>
@@ -417,7 +417,7 @@
                     <script-binding/>
                 </options>
             </control>
-            <control>
+           <!--  <control>
                 <group>[Channel2]</group>
                 <key>keylock</key>
                 <status>0x80</status>
@@ -425,7 +425,7 @@
                 <options>
                     <normal/>
                 </options>
-            </control>
+            </control> -->
             <control>
                 <group>[Channel2]</group>
                 <key>NumarkMixTrackProII.pitch</key>
@@ -498,7 +498,7 @@
                     <script-binding/>
                 </options>
             </control>
-            <control>
+            <!-- <control>
                 <group>[Channel2]</group>
                 <key>keylock</key>
                 <status>0x90</status>
@@ -506,7 +506,7 @@
                 <options>
                     <normal/>
                 </options>
-            </control>
+            </control> -->
             <control>
                 <group>[Master]</group>
                 <key>headMix</key>
@@ -552,7 +552,7 @@
                     <script-binding/>
                 </options>
             </control>
-            <control>
+            <!-- <control>
                 <group>[Channel1]</group>
                 <key>keylock</key>
                 <status>0x80</status>
@@ -560,7 +560,7 @@
                 <options>
                     <normal/>
                 </options>
-            </control>
+            </control> -->
             <control>
                 <group>[Channel2]</group>
                 <key>pregain</key>
@@ -635,11 +635,11 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>rate_temp_down</key>
+                <key>NumarkMixTrackProII.pitch_bend_down_or_keylock</key>
                 <status>0x90</status>
                 <midino>0x45</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -651,7 +651,7 @@
                     <diff/>
                 </options>
             </control>
-            <control>
+            <!-- <control>
                 <group>[Channel1]</group>
                 <key>keylock</key>
                 <status>0x90</status>
@@ -659,7 +659,7 @@
                 <options>
                     <normal/>
                 </options>
-            </control>
+            </control> -->
             <control>
                 <group>[Channel1]</group>
                 <key>volume</key>
@@ -698,7 +698,7 @@
                 <off>0x64</off>
                 <maximum>0.1</maximum>
             </output>
-            <output>
+            <!-- <output>
                 <group>[Channel1]</group>
                 <key>keylock</key>
                 <status>0x90</status>
@@ -706,7 +706,7 @@
                 <on>0x00</on>
                 <off>0x64</off>
                 <maximum>0.1</maximum>
-            </output>
+            </output> -->
             <output>
                 <group>[Channel1]</group>
                 <key>beatsync</key>
@@ -804,7 +804,7 @@
                 <on>0x64</on>
                 <maximum>0.1</maximum>
             </output>
-            <output>
+            <!-- <output>
                 <group>[Channel2]</group>
                 <key>keylock</key>
                 <status>0x90</status>
@@ -812,7 +812,7 @@
                 <on>0x00</on>
                 <off>0x64</off>
                 <maximum>0.1</maximum>
-            </output>
+            </output> -->
             <output>
                 <group>[Channel1]</group>
                 <key>flanger</key>

@@ -68,6 +68,7 @@ NumarkMixTrackProII.init = function(id) {   // called when the MIDI device is op
     NumarkMixTrackProII.isKeyLocked = [0, 0];
     NumarkMixTrackProII.touch = [false, false];
     NumarkMixTrackProII.scratchTimer = [-1, -1];
+    NumarkMixTrackProII.shift_is_pressed = [false, false];  // deck 1, deck 2
 
     NumarkMixTrackProII.leds = [
         // Common
@@ -736,3 +737,31 @@ NumarkMixTrackProII.toggleDeleteKey = function(channel, control, value, status, 
 }
 
 
+/* Shift key pressed/unpressed - toggle shift status in controller object
+ * so that other buttons can detect if shift button is currently held down
+ */
+NumarkMixTrackProII.shift = function(channel, control, value, status, group) {
+    var channel_index = group == "[Channel1]" ? 0 : 1;
+    NumarkMixTrackProII.shift_is_pressed[channel_index] = value == 0x7f ? true : false;
+    print("Shift status: " + NumarkMixTrackProII.shift_is_pressed);
+}
+
+/* if shift is held down: toggle keylock
+ * else: temporarily bend the pitch down
+ */
+NumarkMixTrackProII.pitch_bend_down_or_keylock = function(channel, control, value, status, group) {
+    print("PITCH_BEND_DOWN_OR_KEYLOCK");
+    var channel_index = group == "[Channel1]" ? 0 : 1;
+    print("channel index " + channel_index);
+    print("shift is " + NumarkMixTrackProII.shift_is_pressed[channel_index]);
+    if (NumarkMixTrackProII.shift_is_pressed[channel_index]) {
+        // toggle keylock (only on press down)
+        if (value > 0) {
+            var current_keylock_value = engine.getValue(group, 'keylock');
+            engine.setValue(group, 'keylock', 1 ^ current_keylock_value);
+        }
+    } else {
+        // temp pitch down
+        engine.setValue(group, 'rate_temp_down', value == 0 ? 0 : 1);
+    }
+}
