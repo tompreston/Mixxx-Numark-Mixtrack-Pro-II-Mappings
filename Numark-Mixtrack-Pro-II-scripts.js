@@ -1,4 +1,4 @@
-z// Based on Numark Mixtrack Mapping Script Functions
+// Based on Numark Mixtrack Mapping Script Functions
 // 1/11/2010 - v0.1 - Matteo <matteo@magm3.com>
 //
 // 5/18/2011 - Changed by James Ralston
