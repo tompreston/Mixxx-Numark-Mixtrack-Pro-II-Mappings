@@ -607,11 +607,11 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>LoadSelectedTrack</key>
+                <key>NumarkMixTrackProII.load_selected_track</key>
                 <status>0x90</status>
                 <midino>0x4B</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -634,11 +634,11 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>LoadSelectedTrack</key>
+                <key>NumarkMixTrackProII.load_selected_track</key>
                 <status>0x90</status>
                 <midino>0x34</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -731,15 +731,6 @@
                     <normal/>
                 </options>
             </control>
-            <!-- <control>
-                <group>[Channel1]</group>
-                <key>NumarkMixTrackProII.changeHotCue</key>
-                <status>0x90</status>
-                <midino>0x5B</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control> -->
             <control>
                 <group>[Channel2]</group>
                 <key>NumarkMixTrackProII.pitch_bend_down_or_keylock</key>
@@ -814,7 +805,7 @@
                 <maximum>0.1</maximum>
                 <minimum>-0.1</minimum>
             </output>
-            <!-- <output>
+            <output>
                 <group>[Channel2]</group>
                 <key>play</key>
                 <status>0x90</status>
@@ -825,14 +816,6 @@
             </output>
             <output>
                 <group>[Channel2]</group>
-                <key>play</key>
-                <status>0x90</status>
-                <midino>0x3C</midino>
-                <on>0x64</on>
-                <maximum>0.1</maximum>
-            </output> -->
-            <output>
-                <group>[Channel2]</group>
                 <key>beatsync_tempo</key>
                 <status>0x90</status>
                 <midino>0x47</midino>
@@ -840,7 +823,7 @@
                 <off>0x64</off>
                 <maximum>0.1</maximum>
             </output>
-            <!-- <output>
+            <output>
                 <group>[Channel1]</group>
                 <key>play</key>
                 <status>0x90</status>
@@ -849,14 +832,6 @@
                 <off>0x64</off>
                 <maximum>0.1</maximum>
             </output>
-            <output>
-                <group>[Channel1]</group>
-                <key>play</key>
-                <status>0x90</status>
-                <midino>0x33</midino>
-                <on>0x64</on>
-                <maximum>0.1</maximum>
-            </output> -->
 
             <!-- Sampler lights -->
             <output>

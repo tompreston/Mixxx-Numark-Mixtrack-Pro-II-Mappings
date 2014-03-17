@@ -538,11 +538,11 @@ NumarkMixTrackProII.flash_peak_indicator = function(value, group, control) {
         engine.stopTimer(NumarkMixTrackProII.led_timer_ids['peak_indicator_'+deck]);
         print("stopped timer");
         // make sure the led's are back on
-        NumarkMixTrackProII._flash_peak_state[deck] = true;
+        NumarkMixTrackProII._flash_peak_state[deck] = false;
         var led_names =NumarkMixTrackProII._flash_peak_led_names;
         for (var i in led_names) {
             NumarkMixTrackProII.setLED(
-                NumarkMixTrackProII.leds[deck][led_names[i]], true);
+                NumarkMixTrackProII.leds[deck][led_names[i]], false);
         }
     }
 }
@@ -653,5 +653,14 @@ NumarkMixTrackProII.tap_or_auto16 = function(channel, control, value, status, gr
         var kill = !engine.getValue(group, c);
         engine.setValue(group, c, kill);
         NumarkMixTrackProII.setLED(NumarkMixTrackProII.leds[deck]['tap'], kill == "1");
+    }
+}
+
+
+/* load selected track also turns on this channels pre-fader cue */
+NumarkMixTrackProII.load_selected_track = function(channel, control, value, status, group) {
+    if (value) {
+        engine.setValue(group, "pfl", 1);
+        engine.setValue(group, "LoadSelectedTrack", 1);
     }
 }
