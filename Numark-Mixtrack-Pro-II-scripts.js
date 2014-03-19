@@ -609,7 +609,7 @@ NumarkMixTrackProII.loop_halve = function(channel, control, value, status, group
 NumarkMixTrackProII.fx1_or_auto1 = function(channel, control, value, status, group) {
     var deck = NumarkMixTrackProII.groupToDeck(group);
     if (value && NumarkMixTrackProII.shift_is_pressed[deck-1]) {
-        engine.setValue(group, 'beatloop', beats);
+        engine.setValue(group, 'beatloop', 1);
     } else if (value) {
         var c = "flanger";
         var kill = !engine.getValue(group, c);
