@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <MixxxControllerPreset mixxxVersion="1.11.0+" schemaVersion="1">
     <info>
-        <name>Numark MixTrack Pro</name>
+        <name>Numark MixTrack Pro II</name>
         <author>Matteo (matteo@magm3.com), James Ralston, and D. J. Freije (dario2004@gmail.com)</author>
         <description>version v1.2 w/brake, backspin, blink beat Leds.</description>
         <forums>http://mixxx.org/forums/viewtopic.php?f=7&amp;t=3828</forums>
