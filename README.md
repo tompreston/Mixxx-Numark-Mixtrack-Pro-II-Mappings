@@ -2,14 +2,17 @@ Numark Mixtrack Pro II Mappings
 ===============================
 More updates to MixTrack Pro II by Christie Grinham
 
-Keylock Button - Slip Mode
-FX-1 Knob: Deck filter
-FX-2 Knob: Deck 1 - Effect Rack 1 Super / Deck 2 - Effect Rack 2 Super
-FX-3 Knob: Nothing
-FX-4 Knob: Deck Gain
-Auto-1 Pad: Keylock
-S4 Pad: 4th Cue
+##### Keys
+* Keylock Button: Slip Mode
+* FX-1 Knob: Deck filter
+* FX-2 Knob: Deck 1 - Effect Rack 1 Super / Deck 2 - Effect Rack 2 Super
+* FX-3 Knob: Nothing
+* FX-4 Knob: Deck Gain
 
+* Auto-1 Pad: Keylock
+* S4 Pad: 4th Cue
+
+##### Changes
 
 * Keylock has been moved to S4 pad so it is easier to access
 * Removed Hotcue delete mode as I never used it, S4 now sets/plays 4th Cue
