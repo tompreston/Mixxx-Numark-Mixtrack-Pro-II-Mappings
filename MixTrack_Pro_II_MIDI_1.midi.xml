@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <MixxxControllerPreset mixxxVersion="1.11.0+" schemaVersion="1">
     <info>
-        <name>Numark MixTrack Pro II</name>
+        <name>Numark MixTrack Pro II - Christie</name>
         <author>Matteo (matteo@magm3.com), James Ralston, and D. J. Freije (dario2004@gmail.com)</author>
         <description>version v1.2 w/brake, backspin, blink beat Leds.</description>
         <forums>http://mixxx.org/forums/viewtopic.php?f=7&amp;t=3828</forums>
@@ -9,7 +9,7 @@
     </info>
     <controller id="MixTrack">
         <scriptfiles>
-            <file functionprefix="NumarkMixTrackProII" filename="Numark-Mixtrack-Pro-II-scripts.js"/>
+            <file functionprefix="NumarkMixTrackProII" filename="Numark-Mixtrack-Pro-II-christie.js"/>
         </scriptfiles>
         <controls>
             <control>
@@ -19,15 +19,6 @@
                 <midino>0x6F</midino>
                 <options>
                     <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Flanger]</group>
-                <key>lfoDelay</key>
-                <status>0xB0</status>
-                <midino>0x1D</midino>
-                <options>
-                    <diff/>
                 </options>
             </control>
             <control>
@@ -50,7 +41,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>NumarkMixTrackProII.pitch_bend_down_or_keylock</key>
+                <key>NumarkMixTrackProII.pitch_bend_down_or_slip</key>
                 <status>0x90</status>
                 <midino>0x43</midino>
                 <options>
@@ -64,15 +55,6 @@
                 <midino>0x6E</midino>
                 <options>
                     <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Flanger]</group>
-                <key>lfoDepth</key>
-                <status>0xB0</status>
-                <midino>0x1C</midino>
-                <options>
-                    <diff/>
                 </options>
             </control>
             <control>
@@ -103,12 +85,21 @@
                 </options>
             </control>
             <control>
-                <group>[Flanger]</group>
-                <key>lfoPeriod</key>
+                <group>[QuickEffectRack1_[Channel1]]</group>
+                <key>NumarkMixTrackProII.track_filter</key>
                 <status>0xB0</status>
                 <midino>0x1B</midino>
                 <options>
-                    <diff/>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[EffectRack1_EffectUnit1]</group>
+                <key>NumarkMixTrackProII.fx_super</key>
+                <status>0xB0</status>
+                <midino>0x1C</midino>
+                <options>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -184,8 +175,9 @@
                 </options>
             </control>
             <control>
-                <group>[Channel1]</group>
-                <key>reverse</key>
+                <group>[EffectRack1_EffectUnit2]</group>
+                <key>group_[Channel2]_enable</key>
+                <description>MIDI Learned from 6 messages.</description>
                 <status>0x90</status>
                 <midino>0x6A</midino>
                 <options>
@@ -220,8 +212,9 @@
                 </options>
             </control>
             <control>
-                <group>[Microphone]</group>
-                <key>talkover</key>
+                <group>[EffectRack1_EffectUnit1]</group>
+                <key>group_[Channel2]_enable</key>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0x90</status>
                 <midino>0x69</midino>
                 <options>
@@ -328,8 +321,9 @@
                 </options>
             </control>
             <control>
-                <group>[Sampler2]</group>
-                <key>play</key>
+                <group>[EffectRack1_EffectUnit2]</group>
+                <key>group_[Channel1]_enable</key>
+                <description>MIDI Learned from 2 messages.</description>
                 <status>0x90</status>
                 <midino>0x66</midino>
                 <options>
@@ -346,8 +340,9 @@
                 </options>
             </control>
             <control>
-                <group>[Sampler1]</group>
-                <key>play</key>
+                <group>[EffectRack1_EffectUnit1]</group>
+                <key>group_[Channel1]_enable</key>
+                <description>MIDI Learned from 2 messages.</description>
                 <status>0x90</status>
                 <midino>0x65</midino>
                 <options>
@@ -451,6 +446,15 @@
                 <midino>0x4C</midino>
                 <options>
                     <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[PreviewDeck]</group>
+                <key>NumarkMixTrackProII.preview_track</key>
+                <status>0x90</status>
+                <midino>0x77</midino>
+                <options>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -698,7 +702,7 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>NumarkMixTrackProII.pitch_bend_down_or_keylock</key>
+                <key>NumarkMixTrackProII.pitch_bend_down_or_slip</key>
                 <status>0x90</status>
                 <midino>0x45</midino>
                 <options>
@@ -710,6 +714,24 @@
                 <key>NumarkMixTrackProII.hotcue</key>
                 <status>0x90</status>
                 <midino>0x70</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[QuickEffectRack1_[Channel2]]</group>
+                <key>NumarkMixTrackProII.track_filter</key>
+                <status>0xB0</status>
+                <midino>0x1E</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[EffectRack1_EffectUnit1]</group>
+                <key>NumarkMixTrackProII.fx_super</key>
+                <status>0xB0</status>
+                <midino>0x1F</midino>
                 <options>
                     <script-binding/>
                 </options>
@@ -744,19 +766,19 @@
         </controls>
         <outputs>
             <output>
-                <group>[Channel1]</group>
+                <group>[Channel2]</group>
                 <key>hotcue_1_enabled</key>
                 <status>0x90</status>
-                <midino>0x6D</midino>
+                <midino>0x71</midino>
                 <on>0x00</on>
                 <off>0x64</off>
                 <maximum>0.1</maximum>
             </output>
             <output>
-                <group>[Sampler3]</group>
-                <key>play</key>
+                <group>[Channel2]</group>
+                <key>hotcue_3_enabled</key>
                 <status>0x90</status>
-                <midino>0x67</midino>
+                <midino>0x73</midino>
                 <on>0x00</on>
                 <off>0x64</off>
                 <maximum>0.1</maximum>
@@ -771,19 +793,46 @@
                 <maximum>0.1</maximum>
             </output>
             <output>
-                <group>[Sampler2]</group>
+                <group>[Sampler3]</group>
                 <key>play</key>
                 <status>0x90</status>
-                <midino>0x66</midino>
+                <midino>0x67</midino>
                 <on>0x00</on>
                 <off>0x64</off>
                 <maximum>0.1</maximum>
             </output>
             <output>
-                <group>[Channel1]</group>
-                <key>hotcue_2_enabled</key>
+                <group>[Channel2]</group>
+                <key>rate</key>
                 <status>0x90</status>
-                <midino>0x6E</midino>
+                <midino>0x71</midino>
+                <on>0x64</on>
+                <maximum>0.1</maximum>
+                <minimum>-0.1</minimum>
+            </output>
+            <output>
+                <group>[Channel2]</group>
+                <key>beatsync</key>
+                <status>0x90</status>
+                <midino>0x47</midino>
+                <on>0x00</on>
+                <off>0x64</off>
+                <maximum>0.1</maximum>
+            </output>
+            <output>
+                <group>[Channel2]</group>
+                <key>reverse</key>
+                <status>0x90</status>
+                <midino>0x6B</midino>
+                <on>0x00</on>
+                <off>0x64</off>
+                <maximum>0.1</maximum>
+            </output>
+            <output>
+                <group>[Sampler1]</group>
+                <key>play</key>
+                <status>0x90</status>
+                <midino>0x65</midino>
                 <on>0x00</on>
                 <off>0x64</off>
                 <maximum>0.1</maximum>
@@ -798,19 +847,19 @@
                 <maximum>0.1</maximum>
             </output>
             <output>
-                <group>[Channel2]</group>
-                <key>hotcue_1_enabled</key>
+                <group>[Microphone]</group>
+                <key>talkover</key>
                 <status>0x90</status>
-                <midino>0x71</midino>
+                <midino>0x69</midino>
                 <on>0x00</on>
                 <off>0x64</off>
                 <maximum>0.1</maximum>
             </output>
             <output>
-                <group>[Sampler1]</group>
-                <key>play</key>
+                <group>[Channel1]</group>
+                <key>hotcue_1_enabled</key>
                 <status>0x90</status>
-                <midino>0x65</midino>
+                <midino>0x6D</midino>
                 <on>0x00</on>
                 <off>0x64</off>
                 <maximum>0.1</maximum>
@@ -834,82 +883,10 @@
                 <maximum>0.1</maximum>
             </output>
             <output>
-                <group>[Channel2]</group>
-                <key>rate</key>
-                <status>0x90</status>
-                <midino>0x71</midino>
-                <on>0x64</on>
-                <maximum>0.1</maximum>
-                <minimum>-0.1</minimum>
-            </output>
-            <output>
-                <group>[Channel2]</group>
-                <key>play</key>
-                <status>0x90</status>
-                <midino>0x42</midino>
-                <on>0x00</on>
-                <off>0x64</off>
-                <maximum>0.1</maximum>
-            </output>
-            <output>
-                <group>[Channel2]</group>
-                <key>hotcue_3_enabled</key>
-                <status>0x90</status>
-                <midino>0x73</midino>
-                <on>0x00</on>
-                <off>0x64</off>
-                <maximum>0.1</maximum>
-            </output>
-            <output>
-                <group>[Channel2]</group>
-                <key>reverse</key>
-                <status>0x90</status>
-                <midino>0x6B</midino>
-                <on>0x00</on>
-                <off>0x64</off>
-                <maximum>0.1</maximum>
-            </output>
-            <output>
-                <group>[Channel1]</group>
-                <key>rate</key>
-                <status>0x90</status>
-                <midino>0x70</midino>
-                <on>0x64</on>
-                <maximum>0.1</maximum>
-                <minimum>-0.1</minimum>
-            </output>
-            <output>
-                <group>[Channel1]</group>
-                <key>reverse</key>
-                <status>0x90</status>
-                <midino>0x6A</midino>
-                <on>0x00</on>
-                <off>0x64</off>
-                <maximum>0.1</maximum>
-            </output>
-            <output>
-                <group>[Microphone]</group>
-                <key>talkover</key>
-                <status>0x90</status>
-                <midino>0x69</midino>
-                <on>0x00</on>
-                <off>0x64</off>
-                <maximum>0.1</maximum>
-            </output>
-            <output>
                 <group>[Channel1]</group>
                 <key>play</key>
                 <status>0x90</status>
                 <midino>0x3B</midino>
-                <on>0x00</on>
-                <off>0x64</off>
-                <maximum>0.1</maximum>
-            </output>
-            <output>
-                <group>[Channel2]</group>
-                <key>beatsync</key>
-                <status>0x90</status>
-                <midino>0x47</midino>
                 <on>0x00</on>
                 <off>0x64</off>
                 <maximum>0.1</maximum>
@@ -928,6 +905,51 @@
                 <key>play</key>
                 <status>0x90</status>
                 <midino>0x68</midino>
+                <on>0x00</on>
+                <off>0x64</off>
+                <maximum>0.1</maximum>
+            </output>
+            <output>
+                <group>[Channel1]</group>
+                <key>reverse</key>
+                <status>0x90</status>
+                <midino>0x6A</midino>
+                <on>0x00</on>
+                <off>0x64</off>
+                <maximum>0.1</maximum>
+            </output>
+            <output>
+                <group>[Sampler2]</group>
+                <key>play</key>
+                <status>0x90</status>
+                <midino>0x66</midino>
+                <on>0x00</on>
+                <off>0x64</off>
+                <maximum>0.1</maximum>
+            </output>
+            <output>
+                <group>[Channel1]</group>
+                <key>rate</key>
+                <status>0x90</status>
+                <midino>0x70</midino>
+                <on>0x64</on>
+                <maximum>0.1</maximum>
+                <minimum>-0.1</minimum>
+            </output>
+            <output>
+                <group>[Channel1]</group>
+                <key>hotcue_2_enabled</key>
+                <status>0x90</status>
+                <midino>0x6E</midino>
+                <on>0x00</on>
+                <off>0x64</off>
+                <maximum>0.1</maximum>
+            </output>
+            <output>
+                <group>[Channel2]</group>
+                <key>play</key>
+                <status>0x90</status>
+                <midino>0x42</midino>
                 <on>0x00</on>
                 <off>0x64</off>
                 <maximum>0.1</maximum>

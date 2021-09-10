@@ -1,4 +1,5 @@
 // Based on Numark Mixtrack Mapping Script Functions
+//
 // 1/11/2010 - v0.1 - Matteo <matteo@magm3.com>
 //
 // 5/18/2011 - Changed by James Ralston
@@ -8,6 +9,9 @@
 //  Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI
 //
 // 05/26/2012 to 06/27/2012 - Changed by Darío José Freije <dario2004@gmail.com>
+
+// 02/11/2017 - Modifications by Christie grinham <christiegrinham@gmail.com>
+// 
 //
 //  Almost all work like expected. Resume and Particularities:
 //
@@ -56,6 +60,26 @@
 //
 
 
+/* CHRISTIE GRINHAM NEW FUNCTIONS
+
+FX - Set lights on/off
+Beat Roll Loop
+Fix scratch keylock - set isKeyLocked to 1?
+
+DONE:
+Gains
+Filters
+Change FX1 to Keylock
+Remove hotcue delete mode, replace with cue 4
+Preview - If preview is playing, stop, otherwise load selected and play
+SLIP MODE Switch - Keylock Button
+
+
+Known Issues:
+When scratch backwards through a loop, loop is disabled or keylock is disabled.
+
+*/
+
 function NumarkMixTrackProII() {}
 
 NumarkMixTrackProII.init = function(id) {   // called when the MIDI device is opened & set up
@@ -102,7 +126,7 @@ NumarkMixTrackProII.init = function(id) {   // called when the MIDI device is op
          "hotcue_1" : 0x6D,
          "hotcue_2" : 0x6E,
          "hotcue_3" : 0x6F,
-         "hotcue_delete" : 0x70,
+         "hotcue_4" : 0x70,
          "fx1": 0x59,
          "fx2": 0x5A,
          "fx3": 0x5B,
@@ -125,7 +149,7 @@ NumarkMixTrackProII.init = function(id) {   // called when the MIDI device is op
          "hotcue_1" : 0x71,
          "hotcue_2" : 0x72,
          "hotcue_3" : 0x73,
-         "hotcue_delete" : 0x74,
+         "hotcue_4" : 0x74,
          "fx1": 0x5D,
          "fx2": 0x5E,
          "fx3": 0x5F,
@@ -408,6 +432,18 @@ NumarkMixTrackProII.wheelTouch = function(channel, control, value, status, group
     }
 }
 
+
+/* Load and Play Selected Track in Preview Deck or pause if playing */
+NumarkMixTrackProII.preview_track = function(channel, control, value, status, group) {
+    if (value > 0) {
+        if (engine.getValue("[PreviewDeck1]", "play") == 1.0) {
+            engine.setValue("[PreviewDeck1]", "stop", 1);
+        } else {
+            engine.setValue("[PreviewDeck1]", "LoadSelectedTrackAndPlay", true);
+        }
+    }
+}
+
 NumarkMixTrackProII.toggleDirectoryMode = function(channel, control, value, status, group) {
     // Toggle setting and light
     if (value) {
@@ -445,6 +481,8 @@ NumarkMixTrackProII.shift = function(channel, control, value, status, group) {
     NumarkMixTrackProII.shift_is_pressed[deck-1] = value == 0x7f ? true : false;
 }
 
+
+// OLD FUNCTION
 /* if shift is held down: toggle keylock
  * else: temporarily bend the pitch down
  */
@@ -455,6 +493,24 @@ NumarkMixTrackProII.pitch_bend_down_or_keylock = function(channel, control, valu
         if (value > 0) {
             var current_keylock_value = engine.getValue(group, 'keylock');
             engine.setValue(group, 'keylock', !current_keylock_value);
+        }
+    } else {
+        // temp pitch down
+        engine.setValue(group, 'rate_temp_down', value == 0 ? 0 : 1);
+    }
+}
+
+// NEW FUNCTION
+/* if shift is held down: toggle keylock
+ * else: temporarily bend the pitch down
+ */
+NumarkMixTrackProII.pitch_bend_down_or_slip = function(channel, control, value, status, group) {
+    var deck = NumarkMixTrackProII.groupToDeck(group);
+    if (NumarkMixTrackProII.shift_is_pressed[deck-1]) {
+        // toggle slip_enabled (only on press down)
+        if (value > 0) {
+            var current_slip_enabled_value = engine.getValue(group, 'slip_enabled');
+            engine.setValue(group, 'slip_enabled', !current_slip_enabled_value);
         }
     } else {
         // temp pitch down
@@ -487,18 +543,13 @@ NumarkMixTrackProII.pitch_bend_up_or_range = function(channel, control, value, s
  */
 NumarkMixTrackProII.hotcue = function(channel, control, value, status, group) {
     var deck = NumarkMixTrackProII.groupToDeck(group);
-    var cue_midi_controls = [[0x6D, 0x6E, 0x6F], [0x71, 0x71, 0x73]];
+    var cue_midi_controls = [[0x6D, 0x6E, 0x6F, 0x70], [0x71, 0x72, 0x73, 0x74]];
     var cue_num = cue_midi_controls[deck-1].indexOf(control) + 1;
-    if (value && (control == 0x70 || control == 0x74)) {
-        // toggle cue delete mode and it's LED
-        NumarkMixTrackProII.cue_delete_mode[deck-1] = !NumarkMixTrackProII.cue_delete_mode[deck-1];
-        NumarkMixTrackProII.setLED(NumarkMixTrackProII.leds[deck]["hotcue_delete"],
-                                   NumarkMixTrackProII.cue_delete_mode[deck-1]);
-    } else if (value && NumarkMixTrackProII.cue_delete_mode[deck-1]) {
+    if (value && NumarkMixTrackProII.cue_delete_mode[deck-1]) {
         // clear the cue and exit delete mode
         engine.setValue(group, 'hotcue_'+cue_num+'_clear', value);
         NumarkMixTrackProII.cue_delete_mode[deck-1] = false;
-        NumarkMixTrackProII.setLED(NumarkMixTrackProII.leds[deck]["hotcue_delete"], false);
+        NumarkMixTrackProII.setLED(NumarkMixTrackProII.leds[deck]["hotcue_4"], false);
     } else if (cue_num >= 1) {
         engine.setValue(group, 'hotcue_'+cue_num+'_activate', value);
     }
@@ -611,12 +662,12 @@ NumarkMixTrackProII.fx1_or_auto1 = function(channel, control, value, status, gro
     if (value && NumarkMixTrackProII.shift_is_pressed[deck-1]) {
         engine.setValue(group, 'beatloop', 1);
     } else if (value) {
-        var c = "flanger";
-        var kill = !engine.getValue(group, c);
-        print("setting value");
-        engine.setValue(group, c, kill);
-        print("turning on led");
-        NumarkMixTrackProII.setLED(NumarkMixTrackProII.leds[deck]['fx1'], kill == "1");
+        // Set Keylock
+        // toggle keylock (only on press down)
+        if (value > 0) {
+            var current_keylock_value = engine.getValue(group, 'keylock');
+            engine.setValue(group, 'keylock', !current_keylock_value);
+        }
     }
 }
 
@@ -662,5 +713,55 @@ NumarkMixTrackProII.load_selected_track = function(channel, control, value, stat
     if (value) {
         engine.setValue(group, "pfl", 1);
         engine.setValue(group, "LoadSelectedTrack", 1);
+    }
+}
+
+/* Channel Filter */
+NumarkMixTrackProII.track_filter = function(channel, control, value, status, group) {
+    print (group)
+    // Check the deck
+    if (control == "0x1B") {
+        deck = 1;
+    } else if (control == "0x1E") {
+        deck = 2;
+    }
+
+    var c = "QuickEffectRack";
+    // Get current value
+    var currentValue = engine.getParameter("[QuickEffectRack1_[Channel" + deck +"]]", "super1");
+    var increment = 1 / 30;
+
+    // Increase of decrease
+    if (value == "0x01") {
+        // increase value
+        engine.setParameter("[QuickEffectRack1_[Channel" + deck +"]]", "super1", (currentValue + increment));
+    } else if (value == "0x7F") {
+        // decrease value
+        engine.setParameter("[QuickEffectRack1_[Channel" + deck +"]]", "super1", (currentValue - increment));
+    }
+}
+
+/* Channel Filter */
+NumarkMixTrackProII.fx_super = function(channel, control, value, status, group) {
+    print (group)
+
+    if (control == 0x1C) {
+        var g = "[EffectRack1_EffectUnit1]";
+    } else {
+        var g = "[EffectRack1_EffectUnit2]";
+    }
+
+    var c = "super1"
+    // Get current value
+    var currentValue = engine.getParameter(g, c);
+    var increment = 1 / 30;
+
+    // Increase of decrease
+    if (value == "0x01") {
+        // increase value
+        engine.setParameter(g, c, (currentValue + increment));
+    } else if (value == "0x7F") {
+        // decrease value
+        engine.setParameter(g, c, (currentValue - increment));
     }
 }
